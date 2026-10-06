@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f3f2ef;
+            margin: 0;
+        }
+
+        .form {
+            background: white;
+            padding: 25px;
+            margin: 30px auto;
+            width: 500px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        button {
+            padding: 10px 25px;
+            background: #0a66c2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .profile {
+            background: white;
+            width: 800px;
+            margin: 30px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        .profilepic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .skill {
+            display: inline-block;
+            background: #e8f3ff;
+            color: #0a66c2;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- FORM -->
+
+<div class="form">
+
+    <h1>😊 Create Your Profile</h1>
+
+    <form method="POST">
+
+        <input type="text"
+               name="profilepic"
+               placeholder="Profile picture URL"
+               required>
+
+        <input type="text"
+               name="bannerurl"
+               placeholder="Banner URL"
+               required>
+
+        <input type="text"
+               name="name"
+               placeholder="Enter your name"
+               required>
+
+        <input type="email"
+               name="email"
+               placeholder="Enter your email"
+               required>
+
+        <input type="text"
+               name="phone"
+               placeholder="Enter your phone"
+               required>
+
+        <input type="text"
+               name="address"
+               placeholder="Enter your address"
+               required>
+
+        <input type="text"
+               name="skills"
+               placeholder="Python, Flask, HTML, CSS"
+               required>
+
+        <button type="submit">Create Profile</button>
+
+    </form>
+
+</div>
+
+
+<!-- PROFILE -->
+
+{% if data %}
+
+<div class="profile">
+
+    <!-- Banner -->
+
+    <img src="{{ data['bannerurl'] }}"
+         class="banner"
+         alt="Banner">
+
+    <div class="content">
+
+        <!-- Profile Picture -->
+
+        <img src="{{ data['profilepic'] }}"
+             class="profilepic"
+             alt="Profile">
+
+        <!-- Name -->
+
+        <h1>{{ data['name'] }}</h1>
+
+        <!-- Contact -->
+
+        <p>📧 {{ data['email'] }}</p>
+
+        <p>📱 {{ data['phone'] }}</p>
+
+        <p>📍 {{ data['address'] }}</p>
+
+        <hr>
+
+        <!-- Skills -->
+
+        <h2>💻 Skills</h2>
+
+        {% for skill in data['skills'].split(',') %}
+
+            <span class="skill">
+                {{ skill.strip() }}
+            </span>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endif %}
+
+</body>
+</html>
